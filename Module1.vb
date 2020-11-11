@@ -40,7 +40,15 @@ Module Module1
             For Each arg As String In args
                 Dim res As String = Pingit(arg)
                 'Console.WriteLine(arg & " " & res & " " & System.DateTime.Now)
-                Console.Write(".")
+                Dim count As Integer = 0
+                While count < 20
+                    Console.Write(".")
+                    count += 1
+                End While
+                'Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1)
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1)
+                'Console.Write('\r')
+                Console.WriteLine("Checking:")
                 If res <> "Success" Then
                     fileWriter.WriteLine(arg & " - " & res & " - " & System.DateTime.Now)
                 End If
@@ -70,6 +78,13 @@ Module Module1
 
         Return reply.Status.ToString
 
+    End Function
+
+    Function ClearLine()
+        Dim currentLine As Integer = Console.CursorTop
+        Console.SetCursorPosition(0, Console.CursorTop)
+        'Console.Write(New String(' ', Console.WindowWidth))
+        'Console.SetCursorPosition(0, Console.CursorTop)
     End Function
 
 End Module
